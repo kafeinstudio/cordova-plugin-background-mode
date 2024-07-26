@@ -116,7 +116,11 @@ public class ForegroundService extends Service {
      */
     @Override
     public int onStartCommand (Intent intent, int flags, int startId) {
-        return START_STICKY;
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.TIRAMISU) {
+                return START_STICKY;
+        }
+
+        return START_NOT_STICKY;
     }
 
     /**
