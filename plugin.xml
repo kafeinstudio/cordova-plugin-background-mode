@@ -72,15 +72,17 @@
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <service android:name="de.appplant.cordova.plugin.background.ForegroundService" android:foregroundServiceType="camera" tools:node="merge"/>
+            <service android:name="de.appplant.cordova.plugin.background.ForegroundService"
+                     android:foregroundServiceType="specialUse" tools:node="merge">
+                <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                          android:value="When not enough memory, application is running in background mode, to allow user take photo"/>
+            </service>
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.WAKE_LOCK" />
             <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-            <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
-            <uses-permission android:name="android.permission.CAMERA" />
-            <uses-permission android:name="android.permission.SYSTEM_CAMERA" />
+            <uses-permission android:name="android.permission.FOREGROUND_SERVICE_TYPE_SPECIAL_USE" />
         </config-file>
 
         <source-file
