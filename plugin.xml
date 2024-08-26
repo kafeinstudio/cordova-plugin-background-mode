@@ -75,7 +75,7 @@
             <service android:name="de.appplant.cordova.plugin.background.ForegroundService"
                      android:foregroundServiceType="specialUse" tools:node="merge">
                 <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-                          android:value="When not enough memory, application is running in background mode, to allow user take photo"/>
+                          android:value="Allows the user to use the camera when the phone is in a low memory state"/>
             </service>
         </config-file>
 
