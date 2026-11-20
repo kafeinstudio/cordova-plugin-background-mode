@@ -155,12 +155,20 @@ public class BackgroundMode extends CordovaPlugin {
 
     /**
      * Called when the activity will be destroyed.
+     *
+     * The process is only killed when the activity is really finishing (back button, swipe away: see #304).
+     * When the system destroys it to reclaim resources (e.g. while the camera is open), the process must
+     * survive so that Android can recreate the activity and deliver the pending activity result.
      */
     @Override
     public void onDestroy()
     {
         stopService();
-        android.os.Process.killProcess(android.os.Process.myPid());
+
+        Activity activity = cordova.getActivity();
+        if (activity == null || activity.isFinishing()) {
+            android.os.Process.killProcess(android.os.Process.myPid());
+        }
     }
 
     /**
